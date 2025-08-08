@@ -65,7 +65,7 @@ FileMapping OpenMappedFile(const std::wstring &filepath) {
   result.size = filesize;
   
   float *pinned_buffer = nullptr;
-  cudaError_t err = cudaMallocHost(reinterpret_cast<void **>(&pinned_buffer), 16777216);
+  cudaError_t err = cudaMallocHost(reinterpret_cast<void **>(&pinned_buffer), REQUIRED_FILESIZE);
   result.mapped_ptr = pinned_buffer;
 
   if (err != cudaSuccess) {
@@ -196,4 +196,5 @@ void log_fft(const char *label, size_t rows, size_t chunk_size,
         << "," << elapsed_ms << "," << ns_per_float << "\n";
   }
   #endif
+
 }
